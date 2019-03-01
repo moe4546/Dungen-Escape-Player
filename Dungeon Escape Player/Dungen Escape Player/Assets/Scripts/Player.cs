@@ -10,10 +10,12 @@ public class Player : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     private Rigidbody2D _rigid;
+    private PlayerAnimation _playerAnimation;
     
     void Start()
     {
         _rigid = GetComponent<Rigidbody2D>();
+        _playerAnimation = GetComponent<PlayerAnimation>();
     }
 
     
@@ -27,7 +29,11 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = _rigid.velocity.y;
 
-        if (Input.GetKeyDown("space") && isGroundend())
+        _playerAnimation.Run(horizontalInput);
+        bool grounded = isGroundend();
+        _playerAnimation.Jump(!grounded);
+
+        if (Input.GetKeyDown("space") && grounded)
         {
             verticalInput = jumpForce;
         }
