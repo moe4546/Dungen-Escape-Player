@@ -22,6 +22,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         Movement();
+        Attack();
+    }
+
+    private void Attack()
+    {
+        if(Input.GetMouseButtonDown(0) && isGroundend())
+        {
+            _playerAnimation.Attack();
+        }
     }
 
     private void Movement()
@@ -44,6 +53,7 @@ public class Player : MonoBehaviour
     public bool isGroundend()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, rayLength, groundLayer);
+        Debug.DrawRay(transform.position, new Vector3(0, -rayLength, 0), Color.green);
         
         if(hit.collider != null)
         {
