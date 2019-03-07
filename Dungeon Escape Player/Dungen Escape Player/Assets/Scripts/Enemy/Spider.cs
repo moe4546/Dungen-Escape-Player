@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Spider : Enemy
 {
+    public override void Start()
+    {
+        base.Start();
+    }
+
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        SetCurrentAnimation();
+
+        if (currentAnimation != "Idle")
+        {
+            Patrol();
+        }
     }
 }
