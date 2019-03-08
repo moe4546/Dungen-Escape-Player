@@ -12,6 +12,7 @@ public abstract class Enemy : MonoBehaviour
     protected Animator animator;
     protected string currentAnimation;
     protected SpriteRenderer spriteRenderer;
+    protected bool isHit;
 
     public virtual void Start()
     {
@@ -54,11 +55,6 @@ public abstract class Enemy : MonoBehaviour
     {
         AnimatorClipInfo[] clipInfos = animator.GetCurrentAnimatorClipInfo(0);
         currentAnimation = clipInfos[0].clip.name;
-    }
-
-    public virtual void Attack()
-    {
-
     }
 
     public abstract void Update();
