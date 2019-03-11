@@ -12,7 +12,9 @@ public abstract class Enemy : MonoBehaviour
     protected Animator animator;
     protected string currentAnimation;
     protected SpriteRenderer spriteRenderer;
-    protected bool isHit;
+    protected bool inCombat;
+    protected GameObject player;
+    protected float direction;
 
     public virtual void Start()
     {
@@ -20,6 +22,7 @@ public abstract class Enemy : MonoBehaviour
         spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         transform.position = pointA.position;
         lastPos = pointA;
+        player = FindObjectOfType<Player>().gameObject;
     }
 
     protected void Patrol()
@@ -58,5 +61,36 @@ public abstract class Enemy : MonoBehaviour
     }
 
     public abstract void Update();
+
+    protected void CheckCombat()
+    {
+        float distance = Vector2.Distance(transform.position, player.gameObject.transform.position);
+        if(distance < 2)
+        {
+            inCombat = true;
+            animator.SetTrigger("Idle");
+            animator.SetBool("InCombat", true);
+        }
+        else 
+        {
+            inCombat = false;
+            animator.SetBool("InCombat", false);
+        }
+    }
+
+    protected void LookAtPlayer()
+    {
+        Vector2 dist = player.gameObject.transform.localPosition - transform.localPosition;
+        direction = dist.x;
+        Debug.Log(direction);
+        if(direction < 0)
+        {
+            
+        }
+        else if(direction > 0)
+        {
+            
+        }
+    }
 
 }

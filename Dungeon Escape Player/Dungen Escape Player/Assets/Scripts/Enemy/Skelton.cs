@@ -15,8 +15,9 @@ public class Skelton : Enemy, IDamageable
     public override void Update()
     {
         SetCurrentAnimation();
+        CheckCombat();
 
-        if (currentAnimation != "Idle" && isHit == false)
+        if (currentAnimation != "Idle" && inCombat == false)
         {
             Patrol();
         }
@@ -25,7 +26,8 @@ public class Skelton : Enemy, IDamageable
     public void Damage()
     {
         Health -= 1;
-        isHit = true;
+        inCombat = true;
+        animator.SetBool("InCombat", true);
 
         if(Health < 1)
         {
