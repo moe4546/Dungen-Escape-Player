@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] float moveSpeed = 2f;
     [SerializeField] float rayLength = 2f;
@@ -11,7 +11,9 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D _rigid;
     private PlayerAnimation _playerAnimation;
-    
+
+    public int Health { get; set; }
+
     void Start()
     {
         _rigid = GetComponent<Rigidbody2D>();
@@ -63,5 +65,10 @@ public class Player : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void Damage()
+    {
+        throw new System.NotImplementedException();
     }
 }

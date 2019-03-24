@@ -21,6 +21,11 @@ public class Skelton : Enemy, IDamageable
         {
             Patrol();
         }
+
+        if(inCombat)
+        {
+            LookAtPlayer();
+        }
     }
 
     public void Damage()

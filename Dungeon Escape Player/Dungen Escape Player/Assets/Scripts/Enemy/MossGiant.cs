@@ -15,16 +15,33 @@ public class MossGiant : Enemy, IDamageable
     public override void Update()
     {
         SetCurrentAnimation();
+        CheckCombat();
 
-        if (currentAnimation != "Idle")
+        if (currentAnimation != "Idle" && inCombat == false)
         {
             Patrol();
+        }
+
+        if (inCombat)
+        {
+            LookAtPlayer();
         }
     }
 
     public void Damage()
     {
-        throw new System.NotImplementedException();
+        Health -= 1;
+        inCombat = true;
+        animator.SetBool("InCombat", true);
+
+        if (Health < 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            animator.SetTrigger("Hit");
+        }
     }
 
 }

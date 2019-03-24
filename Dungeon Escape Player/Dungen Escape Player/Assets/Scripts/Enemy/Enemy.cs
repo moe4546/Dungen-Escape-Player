@@ -85,11 +85,11 @@ public abstract class Enemy : MonoBehaviour
         Debug.Log(direction);
         if(direction < 0)
         {
-            
+            spriteRenderer.flipX = true;
         }
         else if(direction > 0)
         {
-            
+            spriteRenderer.flipX = false;
         }
     }
 
